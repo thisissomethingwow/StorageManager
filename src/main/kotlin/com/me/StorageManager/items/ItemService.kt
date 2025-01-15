@@ -1,9 +1,8 @@
 package com.me.StorageManager.items
 
-import com.me.StorageManager.items.ItemRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.RequestBody
+import java.util.*
 
 @Service
 class ItemService(@Autowired private val itemRepository: ItemRepository ) {
@@ -16,4 +15,19 @@ class ItemService(@Autowired private val itemRepository: ItemRepository ) {
     fun addItem(item: Item): Item {
         return itemRepository.save(item)
     }
+
+
+    fun updateItem(id:Long,updatedItem: Item): Item? {
+        val itemToUpdateOptional: Optional<Item> = itemRepository.findById(id)
+        if (itemToUpdateOptional.isPresent){
+            val itemToUpdate: Item = itemToUpdateOptional.get()
+            itemToUpdate.name = updatedItem.name
+            itemToUpdate.amount = updatedItem.amount
+            return itemRepository.save(itemToUpdate)
+        }
+        return null
+    }
+
+
+
 }
