@@ -28,6 +28,8 @@ class ItemService(@Autowired private val itemRepository: ItemRepository ) {
         return null
     }
 
-
+    fun deleteItem(id: Long){
+        return itemRepository.deleteById(id)
+    }
 
 }

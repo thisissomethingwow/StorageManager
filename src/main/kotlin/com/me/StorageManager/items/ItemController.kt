@@ -22,6 +22,8 @@ class ItemController(@Autowired private val itemService: ItemService) {
         return ResponseEntity.ok((itemService.updateItem(id,item)))
     }
 
-
-
+    @DeleteMapping("/{id}")
+    fun deleteItem(@PathVariable id: Long){
+        return itemService.deleteItem(id)
+    }
 }
